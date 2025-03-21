@@ -24,6 +24,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - ./pitpos.sql:/docker-entrypoint-initdb.d/pitpos.sql  # Auto-import database dump
+      - ./init_test_db.sql:/docker-entrypoint-initdb.d/init_test_db.sql  # Auto-import database dump
     networks:
       - laravel_network
 
