@@ -8,9 +8,20 @@ use App\Http\Controllers\Controller;
 
 class UnitOfMeasureController extends Controller
 {
-    public function index()
-    {
-        return response()->json(UnitOfMeasure::with('status')->get(), 200);
+    public function index(Request $request){
+        $query = UnitOfMeasure::with('status'); // Eager load 'status' relationship
+
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        // Pagination
+        $perPage = $request->input('per_page', 10); // Default 10 items per page
+        $units = $query->paginate($perPage);
+
+        return response()->json($units, 200);
     }
 
     public function store(Request $request)

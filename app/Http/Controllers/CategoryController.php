@@ -9,10 +9,23 @@ use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
 {
-    public function index()
-    {
-        return response()->json(Category::with('status')->get(), 200);
+    public function index(Request $request){
+        $query = Category::with('status'); // Eager load 'status' relationship
+
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+        }
+
+        // Pagination
+        $perPage = $request->input('per_page', 10); // Default 10 items per page
+        $categories = $query->paginate($perPage);
+
+        return response()->json($categories, 200);
     }
+
 
     public function store(Request $request)
     {

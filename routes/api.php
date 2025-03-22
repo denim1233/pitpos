@@ -50,13 +50,13 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::get('/products', [ProductController::class, 'index']);  // Get all products
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
-    Route::get('/products', [ProductController::class, 'index']);  // Get all products
+   
 });
 
 
