@@ -14,10 +14,10 @@ class ProductController extends Controller
         return response()->json($products, 200);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+        try{
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:products,name',
             'description' => 'nullable|string',
             'status_id' => 'required|integer|exists:statuses,id',
             'category_id' => 'required|integer|exists:categories,id',
@@ -31,21 +31,27 @@ class ProductController extends Controller
             'message' => 'Product created successfully!',
             'product' => $product
         ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $e->errors()
+            ], 422);
+        }
     }
 
     /**
      * Update an existing product
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $product = Product::find($id);
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
 
+        try{
         $validatedData = $request->validate([
-            'name' => 'sometimes|string|max:255',
+            'name' => 'sometimes|string|max:255|unique:products,name,' . $id,
             'description' => 'nullable|string',
             'status_id' => 'sometimes|integer|exists:statuses,id',
             'category_id' => 'sometimes|integer|exists:categories,id',
@@ -58,5 +64,11 @@ class ProductController extends Controller
             'message' => 'Product updated successfully!',
             'product' => $product
         ], 200);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $e->errors()
+            ], 422);
+        }
     }
 }

@@ -196,8 +196,8 @@ CREATE TABLE `products` (
   `description` varchar(300) NOT NULL,
   `status_id` smallint(6) NOT NULL,
   `category_id` smallint(6) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_user` smallint(6) NOT NULL,
   `updated_user` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -206,7 +206,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `status_id`, `category_id`, `created_date`, `updated_date`, `created_user`, `updated_user`) VALUES
+INSERT INTO `products` (`id`, `name`, `description`, `status_id`, `category_id`, `created_at`, `updated_at`, `created_user`, `updated_user`) VALUES
 (1, 'Sunlight Lemon', 'Sunlight Lemon Description', 2, 1, '2025-03-18 04:20:04', '2025-03-18 12:44:34', 1, 1),
 (2, 'Joy Antibac', 'Joy Antibac Description', 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
 (3, 'Axion Dish Paste', 'Axion Dish Paste Description', 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
