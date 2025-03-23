@@ -16,7 +16,7 @@ class Product extends Model
         'created_date', 'updated_date', 'created_user', 'updated_user'
     ];
 
-    protected $appends = ['status', 'category'];
+    protected $appends = ['status', 'category', 'unit'];
 
     // Define relationships
     public function statusRelation()
@@ -27,6 +27,11 @@ class Product extends Model
     public function categoryRelation()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function unitRelation()
+    {
+        return $this->belongsTo(UnitOfMeasure::class, 'unit_id');
     }
 
     // Accessors for status name
@@ -41,6 +46,11 @@ class Product extends Model
         return $this->categoryRelation ? $this->categoryRelation->name : null;
     }
 
+    public function getUnitAttribute()
+    {
+        return $this->unitRelation ? $this->unitRelation->name : null;
+    }
+
     // Ensure status_id and category_id are included in the response
-    protected $hidden = ['statusRelation', 'categoryRelation'];
+    protected $hidden = ['statusRelation', 'categoryRelation','unitRelation'];
 }

@@ -1,7 +1,3 @@
-
-CREATE DATABASE pitpos_testing;
-USE pitpos_testing;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -196,6 +192,7 @@ CREATE TABLE `products` (
   `description` varchar(300) NOT NULL,
   `status_id` smallint(6) NOT NULL,
   `category_id` smallint(6) NOT NULL,
+  `unit_id` smallint(6) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_user` smallint(6) NOT NULL,
@@ -206,31 +203,31 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `status_id`, `category_id`, `created_at`, `updated_at`, `created_user`, `updated_user`) VALUES
-(1, 'Sunlight Lemon', 'Sunlight Lemon Description', 2, 1, '2025-03-18 04:20:04', '2025-03-18 12:44:34', 1, 1),
-(2, 'Joy Antibac', 'Joy Antibac Description', 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(3, 'Axion Dish Paste', 'Axion Dish Paste Description', 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(4, 'Mama Lemon', 'Mama Lemon Description', 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(5, 'Tide Powder', 'Tide Powder Description', 1, 2, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(6, 'Ariel Pods', 'Ariel Pods Description', 1, 2, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(7, 'Downy Liquid', 'Downy Liquid Description', 1, 2, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(8, 'Surf Detergent Bar', 'Surf Detergent Bar Description', 1, 2, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(9, 'Coca-Cola', 'Coca-Cola Description', 1, 3, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(10, 'Pepsi', 'Pepsi Description', 1, 3, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(11, 'Sprite', 'Sprite Description', 1, 3, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(12, 'Royal Orange', 'Royal Orange Description', 1, 3, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(13, 'Lays Classic', 'Lays Classic Description', 1, 4, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(14, 'Doritos Nacho Cheese', 'Doritos Nacho Cheese Description', 1, 4, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(15, 'Pringles Original', 'Pringles Original Description', 1, 4, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(16, 'Cheetos Puffs', 'Cheetos Puffs Description', 1, 4, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(17, 'Oreo Chocolate', 'Oreo Chocolate Description', 1, 5, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(18, 'Chips Ahoy', 'Chips Ahoy Description', 1, 5, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(19, 'Marie Biscuits', 'Marie Biscuits Description', 1, 5, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(20, 'Skyflakes Crackers', 'Skyflakes Crackers Description', 1, 5, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(21, 'Red Bull', 'Red Bull Description', 1, 6, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(22, 'Monster Energy', 'Monster Energy Description', 1, 6, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(23, 'Gatorade Blue Bolt', 'Gatorade Blue Bolt Description', 1, 6, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
-(24, 'Powerade Mountain Blast', 'Powerade Mountain Blast Description', 1, 6, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1);
+INSERT INTO `products` (`id`, `name`, `description`, `status_id`, `category_id`, `unit_id`, `created_at`, `updated_at`, `created_user`, `updated_user`) VALUES
+(1, 'Sunlight Lemon', 'Sunlight Lemon Description', 2, 1, 1, '2025-03-18 04:20:04', '2025-03-18 12:44:34', 1, 1),
+(2, 'Joy Antibac', 'Joy Antibac Description', 1, 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(3, 'Axion Dish Paste', 'Axion Dish Paste Description', 1, 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(4, 'Mama Lemon', 'Mama Lemon Description', 1, 1, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(5, 'Tide Powder', 'Tide Powder Description', 1, 2, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(6, 'Ariel Pods', 'Ariel Pods Description', 1, 2, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(7, 'Downy Liquid', 'Downy Liquid Description', 1, 2, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(8, 'Surf Detergent Bar', 'Surf Detergent Bar Description', 1, 2, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(9, 'Coca-Cola', 'Coca-Cola Description', 1, 3, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(10, 'Pepsi', 'Pepsi Description', 1, 3, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(11, 'Sprite', 'Sprite Description', 1, 3, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(12, 'Royal Orange', 'Royal Orange Description', 1, 3, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(13, 'Lays Classic', 'Lays Classic Description', 1, 4, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(14, 'Doritos Nacho Cheese', 'Doritos Nacho Cheese Description', 1, 4, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(15, 'Pringles Original', 'Pringles Original Description', 1, 4, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(16, 'Cheetos Puffs', 'Cheetos Puffs Description', 1, 4, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(17, 'Oreo Chocolate', 'Oreo Chocolate Description', 1, 5, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(18, 'Chips Ahoy', 'Chips Ahoy Description', 1, 5, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(19, 'Marie Biscuits', 'Marie Biscuits Description', 1, 5, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(20, 'Skyflakes Crackers', 'Skyflakes Crackers Description', 1, 5, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(21, 'Red Bull', 'Red Bull Description', 1, 6, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(22, 'Monster Energy', 'Monster Energy Description', 1, 6, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(23, 'Gatorade Blue Bolt', 'Gatorade Blue Bolt Description', 1, 6, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1),
+(24, 'Powerade Mountain Blast', 'Powerade Mountain Blast Description', 1, 6, 1, '2025-03-18 04:20:04', '2025-03-18 04:20:04', 1, 1);
 
 -- --------------------------------------------------------
 

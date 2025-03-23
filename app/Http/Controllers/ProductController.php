@@ -81,4 +81,24 @@ class ProductController extends Controller
             ], 422);
         }
     }
+
+    public function checkPrice(Request $request){
+        $query = Product::query();
+
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('price', '>', "10");
+        }
+
+        // Pagination
+        $perPage = $request->input('per_page', 10); // Default to 10 items per page
+        $products = $query->paginate($perPage);
+
+        return response()->json($products, 200);
+    }
+
+
+
+
 }
