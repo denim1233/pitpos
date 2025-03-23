@@ -52,6 +52,7 @@ class ProductsSeeder extends Seeder
                 'name' => $product['name'],
                 'category_id' => $product['category_id'],
                 'status_id' => $product['status_id'],
+                'unit_id' => 1, // New column added
                 'description' => $product['name'] . ' Description',
                 'created_date' => now(),
                 'updated_date' => now(),

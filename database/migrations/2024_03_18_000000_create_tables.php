@@ -34,6 +34,7 @@ return new class extends Migration {
             $table->string('description', 300);
             $table->smallInteger('status_id'); // Reference to Status Table
             $table->smallInteger('category_id'); // Reference to Category Table
+            $table->smallInteger('unit_id')->default(1)->after('category_id'); // New column
             $table->timestamp('created_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->smallInteger('created_user');
