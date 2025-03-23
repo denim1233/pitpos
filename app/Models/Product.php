@@ -16,7 +16,7 @@ class Product extends Model
         'created_date', 'updated_date', 'created_user', 'updated_user'
     ];
 
-    protected $appends = ['status', 'category', 'unit'];
+    protected $appends = ['status', 'category', 'unit', 'price'];
 
     // Define relationships
     public function statusRelation()
@@ -32,6 +32,11 @@ class Product extends Model
     public function unitRelation()
     {
         return $this->belongsTo(UnitOfMeasure::class, 'unit_id');
+    }
+
+    public function priceRelation()
+    {
+        return $this->hasOne(ProductPrice::class, 'product_id')->latest();
     }
 
     // Accessors for status name
@@ -51,6 +56,11 @@ class Product extends Model
         return $this->unitRelation ? $this->unitRelation->name : null;
     }
 
-    // Ensure status_id and category_id are included in the response
-    protected $hidden = ['statusRelation', 'categoryRelation','unitRelation'];
+    public function getPriceAttribute()
+    {
+        return $this->priceRelation ? $this->priceRelation->price : null;
+    }
+
+    // Ensure status_id and category_id are hidden
+    protected $hidden = ['statusRelation', 'categoryRelation', 'unitRelation', 'priceRelation'];
 }

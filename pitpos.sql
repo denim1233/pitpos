@@ -357,6 +357,49 @@ INSERT INTO `users` (`id`, `name`, `email`, `user_type`, `email_verified_at`, `p
 (1, 'Test User', 'test@example.com', 1, '2025-03-18 04:14:47', '$2y$12$gcp5jMBuVqJW/3ur1st66e4TTcLgmSNRkWuwB/kbN/JtXNhaPLwvm', 'oqh2PUxSYe', '2025-03-18 04:14:47', '2025-03-18 04:14:47'),
 (2, 'apit test now', 'lalibasser@gmail.com', 1, NULL, '$2y$12$BUN9PTNN72OCY5xuTGUNc..3YaN2g49Nit1YhW3kTdwdkaYilBIye', NULL, '2025-03-18 21:26:09', '2025-03-18 21:26:09');
 
+CREATE TABLE `product_price` (
+    `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `product_id` BIGINT(20) UNSIGNED NOT NULL,
+    `unit_id` SMALLINT(6) NOT NULL DEFAULT 1, -- Added unit_id with default value 1
+    `price` DECIMAL(10,2) NOT NULL,
+    `status_id` SMALLINT(6) NOT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_user` SMALLINT(6) NOT NULL,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `updated_user` SMALLINT(6) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert values with unit_id set to 1
+INSERT INTO `product_price` (`product_id`, `unit_id`, `price`, `status_id`, `created_at`, `created_user`, `updated_at`, `updated_user`)
+VALUES
+(1, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(2, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(3, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(4, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(5, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(6, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(7, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(8, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(9, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(10, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(11, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(12, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(13, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(14, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(15, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(16, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(17, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(18, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(19, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(20, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(21, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(22, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(23, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1),
+(24, 1, ROUND(RAND() * 90 + 10, 2), 1, NOW(), 1, NOW(), 1);
+
+
 --
 -- Indexes for dumped tables
 --
@@ -372,6 +415,13 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `product_price`
+--
+ALTER TABLE `product_price`
+  ADD PRIMARY KEY (`id`);
+
 
 --
 -- Indexes for table `categories`
