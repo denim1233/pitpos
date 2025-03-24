@@ -39,28 +39,28 @@ class ProductTest extends TestCase
     }
 
 
-    public function test_it_can_update_a_product(){
+    public function test_it_can_update_a_product()
+{
+    // New update data
+    $updateData = [
+        'name' => 'Test 2',
+        'status_id' => 1,
+        'unit_id' => 1,
+        'updated_user' => 1,
+    ];
 
-        // New update data
-        $updateData = [
-            'name' => 'Test Updates',
-            'status_id' => 1,
-            'updated_user' => 1,
-        ];
+    // Send update request
+    $response = $this->putJson("/api/products/24", $updateData);
 
-        // Send update request
-        $response = $this->putJson("/api/products/24", $updateData);
-
-        // Validate response
-        $response->assertStatus(200)
-                 ->assertJson([
-                     'message' => 'Product updated successfully!',
-                 ]);
-
-        // Check database
-        // $this->assertDatabaseHas('products', [
-        //     'id' => 24,
-        //     'name' => 'Powerade Mountain Blasts'
-        // ]);
+    // Print response content in case of failure
+    if ($response->status() !== 200) {
+        dd($response->json());
     }
+
+    // Validate response
+    $response->assertStatus(200)
+             ->assertJson([
+                 'message' => 'Product updated successfully!',
+             ]);
+}
 }

@@ -82,21 +82,24 @@ class ProductController extends Controller
         }
     }
 
-    public function checkPrice(Request $request){
-        $query = Product::query();
-
-        // Search functionality
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('price', '>', "10");
-        }
-
+    public function checkPrice()
+    {
+        $query = Product::whereHas('priceRelation', function ($q) {
+            $q->where('price', '<', 50);
+        });
+    
         // Pagination
-        $perPage = $request->input('per_page', 10); // Default to 10 items per page
+        $perPage = request()->input('per_page', 10); // Default to 10 items per page
         $products = $query->paginate($perPage);
-
         return response()->json($products, 200);
     }
+
+    public function test2()
+    {
+        $products = Product::find(20);
+        return response()->json($products, 200);
+    }
+    
 
 
 
